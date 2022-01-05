@@ -34,10 +34,12 @@ class ProfileViewController: UIViewController {
     
     private func configure() {
         if isCurrentUser {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"),
-                                                                style: .done,
-                                                                target: self,
-                                                                action: #selector(didTapSettings))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: UIImage(systemName: "gear"),
+                style: .done,
+                target: self,
+                action: #selector(didTapSettings)
+            )
         }
     }
     

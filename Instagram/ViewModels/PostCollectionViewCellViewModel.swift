@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct PostCollectionViewCellViewModel {
+    let postURL: URL
+}
