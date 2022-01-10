@@ -11,11 +11,23 @@ import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        
+        // Add dummy notification for current user
+        let id = NotificationsManager.newIdentifier()
+        let model = IGNotification(
+            identifier: id,
+            notififcationType: 3,
+            profilePictureUrl: "https://iosacademy.io/assets/images/courses/swiftui.png",
+            username: "elonmusk",
+            dateString: String.date(from: Date()) ?? "Now",
+            isFollowing: nil,
+            postId: "12345",
+            postUrl: "https://iosacademy.io/assets/images/courses/swiftui.png"
+        )
+        NotificationsManager.shared.create(notification: model, for: "Hanna")
         
         return true
     }
