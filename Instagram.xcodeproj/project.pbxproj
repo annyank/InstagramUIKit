@@ -51,6 +51,12 @@
 		01A648BC276A754000E99890 /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A648BB276A754000E99890 /* SignInHeaderView.swift */; };
 		01A648BE276A822000E99890 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A648BD276A822000E99890 /* Extensions.swift */; };
 		01A648C0276A9A8C00E99890 /* IGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A648BF276A9A8C00E99890 /* IGTextField.swift */; };
+		01B1D5AF278D825A005A0304 /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B1D5AE278D825A005A0304 /* ProfileHeaderCollectionReusableView.swift */; };
+		01B1D5B1278D832A005A0304 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B1D5B0278D832A005A0304 /* ProfileHeaderViewModel.swift */; };
+		01B1D5B3278D8CA5005A0304 /* ProfileHeaderCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B1D5B2278D8CA5005A0304 /* ProfileHeaderCountView.swift */; };
+		01B1D5B5278D941E005A0304 /* ProfileHeaderCountViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B1D5B4278D941E005A0304 /* ProfileHeaderCountViewViewModel.swift */; };
+		01B1D5B7278DBC9A005A0304 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B1D5B6278DBC9A005A0304 /* UserInfo.swift */; };
+		01B1D5B9278DC05D005A0304 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B1D5B8278DC05D005A0304 /* EditProfileViewController.swift */; };
 		01CBD9B52785E33F007D3618 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CBD9B42785E33F007D3618 /* SearchResultsViewController.swift */; };
 		01F9045A27809BBC003E73A0 /* PosterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F9045927809BBC003E73A0 /* PosterCollectionViewCell.swift */; };
 		01F9045C27809CE3003E73A0 /* PostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F9045B27809CE3003E73A0 /* PostCollectionViewCell.swift */; };
@@ -108,6 +114,12 @@
 		01A648BB276A754000E99890 /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
 		01A648BD276A822000E99890 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		01A648BF276A9A8C00E99890 /* IGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextField.swift; sourceTree = "<group>"; };
+		01B1D5AE278D825A005A0304 /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		01B1D5B0278D832A005A0304 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		01B1D5B2278D8CA5005A0304 /* ProfileHeaderCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCountView.swift; sourceTree = "<group>"; };
+		01B1D5B4278D941E005A0304 /* ProfileHeaderCountViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCountViewViewModel.swift; sourceTree = "<group>"; };
+		01B1D5B6278DBC9A005A0304 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		01B1D5B8278DC05D005A0304 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		01CBD9B42785E33F007D3618 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		01F9045927809BBC003E73A0 /* PosterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCollectionViewCell.swift; sourceTree = "<group>"; };
 		01F9045B27809CE3003E73A0 /* PostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -193,6 +205,8 @@
 				01A648BB276A754000E99890 /* SignInHeaderView.swift */,
 				01A648BF276A9A8C00E99890 /* IGTextField.swift */,
 				011D776427859EEE00BCDE74 /* PhotoCollectionViewCell.swift */,
+				01B1D5AE278D825A005A0304 /* ProfileHeaderCollectionReusableView.swift */,
+				01B1D5B2278D8CA5005A0304 /* ProfileHeaderCountView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +220,7 @@
 				01A648AB276A475B00E99890 /* Notification.swift */,
 				016494A027807AE900E18A57 /* HomeFeedCellType.swift */,
 				0162271F278716F900A6C013 /* NotificationCellType.swift */,
+				01B1D5B6278DBC9A005A0304 /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +235,8 @@
 				0164949C2780798A00E18A57 /* PostCaptionCollectionViewCellViewModel.swift */,
 				0164949E278079F400E18A57 /* PostDatetimeCollectionViewCellViewModel.swift */,
 				01622721278717AD00A6C013 /* NotificationCellViewModels.swift */,
+				01B1D5B0278D832A005A0304 /* ProfileHeaderViewModel.swift */,
+				01B1D5B4278D941E005A0304 /* ProfileHeaderCountViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -272,6 +289,7 @@
 				01A648A3276A46E300E99890 /* SettingsViewController.swift */,
 				011D77622785942600BCDE74 /* PostEditViewController.swift */,
 				01CBD9B42785E33F007D3618 /* SearchResultsViewController.swift */,
+				01B1D5B8278DC05D005A0304 /* EditProfileViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -423,6 +441,8 @@
 				01A6489E276A468000E99890 /* CaptionViewController.swift in Sources */,
 				01F9046027809E07003E73A0 /* PostLikesCollectionViewCell.swift in Sources */,
 				01A64897276A45D500E99890 /* TabBarViewController.swift in Sources */,
+				01B1D5B3278D8CA5005A0304 /* ProfileHeaderCountView.swift in Sources */,
+				01B1D5AF278D825A005A0304 /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				01A648AC276A475B00E99890 /* Notification.swift in Sources */,
 				0162271E2787153000A6C013 /* NotificationsManager.swift in Sources */,
 				01A648B2276A47B100E99890 /* StorageManager.swift in Sources */,
@@ -444,6 +464,8 @@
 				01A64893276A453D00E99890 /* NotificationsViewController.swift in Sources */,
 				0164949F278079F400E18A57 /* PostDatetimeCollectionViewCellViewModel.swift in Sources */,
 				01A648BC276A754000E99890 /* SignInHeaderView.swift in Sources */,
+				01B1D5B9278DC05D005A0304 /* EditProfileViewController.swift in Sources */,
+				01B1D5B5278D941E005A0304 /* ProfileHeaderCountViewViewModel.swift in Sources */,
 				01CBD9B52785E33F007D3618 /* SearchResultsViewController.swift in Sources */,
 				01A648A4276A46E300E99890 /* SettingsViewController.swift in Sources */,
 				01A648C0276A9A8C00E99890 /* IGTextField.swift in Sources */,
@@ -454,12 +476,14 @@
 				01A648AA276A474800E99890 /* Relationship.swift in Sources */,
 				011D77632785942600BCDE74 /* PostEditViewController.swift in Sources */,
 				0162271A278709FC00A6C013 /* LikeNotificationTableViewCell.swift in Sources */,
+				01B1D5B1278D832A005A0304 /* ProfileHeaderViewModel.swift in Sources */,
 				01A648A8276A472700E99890 /* Post.swift in Sources */,
 				0164949D2780798A00E18A57 /* PostCaptionCollectionViewCellViewModel.swift in Sources */,
 				01A648AE276A477700E99890 /* AuthManager.swift in Sources */,
 				01A6489A276A461300E99890 /* SignInViewController.swift in Sources */,
 				01A648BE276A822000E99890 /* Extensions.swift in Sources */,
 				01649499277A3C5300E18A57 /* PostActionsCollectionViewCellViewModel.swift in Sources */,
+				01B1D5B7278DBC9A005A0304 /* UserInfo.swift in Sources */,
 				01F9046427809E2D003E73A0 /* PostDateTimeCollectionViewCell.swift in Sources */,
 				01A64895276A455D00E99890 /* ProfileViewController.swift in Sources */,
 				011D776527859EEE00BCDE74 /* PhotoCollectionViewCell.swift in Sources */,
