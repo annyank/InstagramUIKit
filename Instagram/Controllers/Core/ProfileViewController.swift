@@ -112,6 +112,7 @@ class ProfileViewController: UIViewController {
                 defer {
                     group.leave()
                 }
+                print(isFollowing)
                 buttonType = .follow(isFollowing: isFollowing)
             }
         }
@@ -249,11 +250,13 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 extension ProfileViewController: ProfileHeaderCountViewDelegate {
     func profileHeaderCountViewDidTapFollowers(_ containerView: ProfileHeaderCountView) {
-        
+        let vc = ListViewController(type: .followers(user: user))
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func profileHeaderCountViewDidTapFollowing(_ containerView: ProfileHeaderCountView) {
-        
+        let vc = ListViewController(type: .following(user: user))
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func profileHeaderCountViewDidTapPosts(_ containerView: ProfileHeaderCountView) {
@@ -261,7 +264,7 @@ extension ProfileViewController: ProfileHeaderCountViewDelegate {
             return
         }
         collectionView?.setContentOffset(
-            CGPoint(x: 0, y: view.width * 0.7),
+            CGPoint(x: 0, y: view.width * 0.4),
             animated: true
         )
     }
@@ -279,11 +282,25 @@ extension ProfileViewController: ProfileHeaderCountViewDelegate {
     }
     
     func profileHeaderCountViewDidTapFollow(_ containerView: ProfileHeaderCountView) {
-        
+        DatabaseManager.shared.updateRelationship(state: .follow, for: user.username) { [weak self] success in
+            if !success {
+                print("failed to follow")
+                DispatchQueue.main.async {
+                    self?.collectionView?.reloadData()
+                }
+            }
+        }
     }
     
     func profileHeaderCountViewDidTapUnfollow(_ containerView: ProfileHeaderCountView) {
-        
+        DatabaseManager.shared.updateRelationship(state: .unfollow, for: user.username) { [weak self] success in
+            if !success {
+                print("failed to follow")
+                DispatchQueue.main.async {
+                    self?.collectionView?.reloadData()
+                }
+            }
+        }
     }
 }
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011C17962796B57700C8CE24 /* IGFollowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C17952796B57700C8CE24 /* IGFollowButton.swift */; };
+		011C179827970DA200C8CE24 /* ListUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C179727970DA200C8CE24 /* ListUserTableViewCell.swift */; };
+		011C179A2797169F00C8CE24 /* ListUserTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011C17992797169E00C8CE24 /* ListUserTableViewCellViewModel.swift */; };
 		011D77612781E40D00BCDE74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 011D77602781E40D00BCDE74 /* GoogleService-Info.plist */; };
 		011D77632785942600BCDE74 /* PostEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D77622785942600BCDE74 /* PostEditViewController.swift */; };
 		011D776527859EEE00BCDE74 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D776427859EEE00BCDE74 /* PhotoCollectionViewCell.swift */; };
@@ -68,6 +71,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		011C17952796B57700C8CE24 /* IGFollowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGFollowButton.swift; sourceTree = "<group>"; };
+		011C179727970DA200C8CE24 /* ListUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserTableViewCell.swift; sourceTree = "<group>"; };
+		011C17992797169E00C8CE24 /* ListUserTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		011D77602781E40D00BCDE74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		011D77622785942600BCDE74 /* PostEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewController.swift; sourceTree = "<group>"; };
 		011D776427859EEE00BCDE74 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -207,6 +213,8 @@
 				011D776427859EEE00BCDE74 /* PhotoCollectionViewCell.swift */,
 				01B1D5AE278D825A005A0304 /* ProfileHeaderCollectionReusableView.swift */,
 				01B1D5B2278D8CA5005A0304 /* ProfileHeaderCountView.swift */,
+				011C17952796B57700C8CE24 /* IGFollowButton.swift */,
+				011C179727970DA200C8CE24 /* ListUserTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,6 +245,7 @@
 				01622721278717AD00A6C013 /* NotificationCellViewModels.swift */,
 				01B1D5B0278D832A005A0304 /* ProfileHeaderViewModel.swift */,
 				01B1D5B4278D941E005A0304 /* ProfileHeaderCountViewViewModel.swift */,
+				011C17992797169E00C8CE24 /* ListUserTableViewCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -445,10 +454,12 @@
 				01B1D5AF278D825A005A0304 /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				01A648AC276A475B00E99890 /* Notification.swift in Sources */,
 				0162271E2787153000A6C013 /* NotificationsManager.swift in Sources */,
+				011C17962796B57700C8CE24 /* IGFollowButton.swift in Sources */,
 				01A648B2276A47B100E99890 /* StorageManager.swift in Sources */,
 				01622720278716F900A6C013 /* NotificationCellType.swift in Sources */,
 				01A648A0276A46AE00E99890 /* ListViewController.swift in Sources */,
 				01622718278709C800A6C013 /* FollowNotificationTableViewCell.swift in Sources */,
+				011C179A2797169F00C8CE24 /* ListUserTableViewCellViewModel.swift in Sources */,
 				0162271C27870A2E00A6C013 /* CommentNotificationTableViewCell.swift in Sources */,
 				01F9045C27809CE3003E73A0 /* PostCollectionViewCell.swift in Sources */,
 				01A648A2276A46C500E99890 /* PostViewController.swift in Sources */,
@@ -473,6 +484,7 @@
 				016494A127807AE900E18A57 /* HomeFeedCellType.swift in Sources */,
 				0164949B277A3CA500E18A57 /* PostLikesCollectionViewCellViewModel.swift in Sources */,
 				01A648B0276A479800E99890 /* DatabaseManager.swift in Sources */,
+				011C179827970DA200C8CE24 /* ListUserTableViewCell.swift in Sources */,
 				01A648AA276A474800E99890 /* Relationship.swift in Sources */,
 				011D77632785942600BCDE74 /* PostEditViewController.swift in Sources */,
 				0162271A278709FC00A6C013 /* LikeNotificationTableViewCell.swift in Sources */,

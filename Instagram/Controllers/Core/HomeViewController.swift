@@ -188,7 +188,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 extension HomeViewController: PostLikesCollectionViewCellDelegate {
     func postLikesCollectionViewCellDidTapLikeCount(_ cell: PostLikesCollectionViewCell) {
         print("tapped on like count")
-        let vc = ListViewController()
+        let vc = ListViewController(type: .likers(usernames: []))
         vc.title = "Liked By"
         navigationController?.pushViewController(vc, animated: true)
     }
