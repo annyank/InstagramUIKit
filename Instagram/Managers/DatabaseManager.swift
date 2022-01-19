@@ -40,10 +40,14 @@ final class DatabaseManager {
         for username: String,
         completion: @escaping (Result<[Post], Error>) -> Void
     ) {
-        let ref = database.collection("users").document(username).collection("posts")
+        let ref = database.collection("users")
+            .document(username)
+            .collection("posts")
         ref.getDocuments { snapshot, error in
             guard let posts = snapshot?.documents.compactMap({
                 Post(with: $0.data())
+            }).sorted(by: {
+                return $0.date > $1.date
             }),
             error == nil else {
                 return
