@@ -194,7 +194,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.delegate = self
-            cell.configure(with: viewModel)
+            cell.configure(with: viewModel, index: indexPath.section)
             return cell
         case .post(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(
@@ -214,7 +214,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.delegate = self
-            cell.configure(with: viewModel)
+            cell.configure(with: viewModel, index: indexPath.section)
             return cell
         case .likeCount(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(
@@ -265,19 +265,30 @@ extension HomeViewController: PostCaptionCollectionViewCellDelegate {
 }
 
 extension HomeViewController: PostActionsCollectionViewCellDelegate {
-    func postActionsCollectionViewCellDidTapLike(_ cell: PostActionsCollectionViewCell, isLiked: Bool) {
-        // call DB to update like state
+    func postActionsCollectionViewCellDidTapShare(_ cell: PostActionsCollectionViewCell, index: Int) {
+        let section = viewModels[index]
+        section.forEach { cellType in
+            switch cellType {
+            case .post(let viewModel):
+                let vc = UIActivityViewController(
+                    activityItems: ["Check out this cool post!", viewModel.postURL],
+                    applicationActivities: []
+                )
+                present(vc, animated: true)
+            default:
+                break
+            }
+        }
     }
     
-    func postActionsCollectionViewCellDidTapComment(_ cell: PostActionsCollectionViewCell) {
+    func postActionsCollectionViewCellDidTapComment(_ cell: PostActionsCollectionViewCell, index: Int) {
 //        let vc = PostViewController()
 //        vc.title = "Post"
 //        navigationController?.pushViewController(vc, animated: true)
     }
     
-    func postActionsCollectionViewCellDidTapShare(_ cell: PostActionsCollectionViewCell) {
-        let vc = UIActivityViewController(activityItems: ["Sharing from Instagram"], applicationActivities: [])
-        present(vc, animated: true)
+    func postActionsCollectionViewCellDidTapLike(_ cell: PostActionsCollectionViewCell, isLiked: Bool, index: Int) {
+        // call DB to update like state
     }
 }
 
@@ -288,13 +299,29 @@ extension HomeViewController: PostCollectionViewCellDelegate {
 }
 
 extension HomeViewController: PosterCollectionViewCellDelegate {
-    func posterCollectionViewCellDidTapMore(_ cell: PosterCollectionViewCell) {
-        let sheet = UIAlertController(title: "Post Actions",
-                                      message: nil,
-                                      preferredStyle: .actionSheet)
+    func posterCollectionViewCellDidTapMore(_ cell: PosterCollectionViewCell, index: Int) {
+        let sheet = UIAlertController(
+            title: "Post Actions",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
         sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        sheet.addAction(UIAlertAction(title: "Share Post", style: .default, handler: { _ in
-            print("did tap share post")
+        sheet.addAction(UIAlertAction(title: "Share Post", style: .default, handler: { [weak self] _ in
+            DispatchQueue.main.async {
+                let section = self?.viewModels[index] ?? []
+                section.forEach { cellType in
+                    switch cellType {
+                    case .post(let viewModel):
+                        let vc = UIActivityViewController(
+                            activityItems: ["Check out this cool post!", viewModel.postURL],
+                            applicationActivities: []
+                        )
+                        self?.present(vc, animated: true)
+                    default:
+                        break
+                    }
+                }
+            }
         }))
         sheet.addAction(UIAlertAction(title: "Report Post", style: .destructive, handler: { _ in
             print("did tap report post")
