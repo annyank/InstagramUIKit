@@ -13,6 +13,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     private var viewModels = [[HomeFeedCellType]]()
     
+    private var observer: NSObjectProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,6 +22,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         view.backgroundColor = .systemBackground
         configureCollectionView()
         fetchPosts()
+        
+        observer = NotificationCenter.default.addObserver(
+            forName: .didPostNotification,
+            object: nil,
+            queue: .main,
+            using: { [weak self] _ in
+                self?.viewModels.removeAll()
+                self?.fetchPosts()
+            }
+        )
     }
     
     override func viewDidLayoutSubviews() {
