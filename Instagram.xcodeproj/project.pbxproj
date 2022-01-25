@@ -13,6 +13,7 @@
 		011D77612781E40D00BCDE74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 011D77602781E40D00BCDE74 /* GoogleService-Info.plist */; };
 		011D77632785942600BCDE74 /* PostEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D77622785942600BCDE74 /* PostEditViewController.swift */; };
 		011D776527859EEE00BCDE74 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D776427859EEE00BCDE74 /* PhotoCollectionViewCell.swift */; };
+		0132AB3627A02637004D1D12 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3527A02637004D1D12 /* SettingsModels.swift */; };
 		01622718278709C800A6C013 /* FollowNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01622717278709C800A6C013 /* FollowNotificationTableViewCell.swift */; };
 		0162271A278709FC00A6C013 /* LikeNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01622719278709FC00A6C013 /* LikeNotificationTableViewCell.swift */; };
 		0162271C27870A2E00A6C013 /* CommentNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0162271B27870A2E00A6C013 /* CommentNotificationTableViewCell.swift */; };
@@ -77,6 +78,7 @@
 		011D77602781E40D00BCDE74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		011D77622785942600BCDE74 /* PostEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditViewController.swift; sourceTree = "<group>"; };
 		011D776427859EEE00BCDE74 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		0132AB3527A02637004D1D12 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		01622717278709C800A6C013 /* FollowNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		01622719278709FC00A6C013 /* LikeNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		0162271B27870A2E00A6C013 /* CommentNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				016494A027807AE900E18A57 /* HomeFeedCellType.swift */,
 				0162271F278716F900A6C013 /* NotificationCellType.swift */,
 				01B1D5B6278DBC9A005A0304 /* UserInfo.swift */,
+				0132AB3527A02637004D1D12 /* SettingsModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 			files = (
 				01A6489E276A468000E99890 /* CaptionViewController.swift in Sources */,
 				01F9046027809E07003E73A0 /* PostLikesCollectionViewCell.swift in Sources */,
+				0132AB3627A02637004D1D12 /* SettingsModels.swift in Sources */,
 				01A64897276A45D500E99890 /* TabBarViewController.swift in Sources */,
 				01B1D5B3278D8CA5005A0304 /* ProfileHeaderCountView.swift in Sources */,
 				01B1D5AF278D825A005A0304 /* ProfileHeaderCollectionReusableView.swift in Sources */,
