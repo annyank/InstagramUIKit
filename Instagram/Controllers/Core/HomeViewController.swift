@@ -66,11 +66,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
             
         userGroup.notify(queue: .main) {
-            let sorted = allPosts.sorted(by: {
-                return $0.post.date > $1.post.date
-            })
             let group = DispatchGroup()
-            sorted.forEach { model in
+            allPosts.forEach { model in
                 group.enter()
                 self.createViewModel(
                     model: model.post,
@@ -87,9 +84,39 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             
             group.notify(queue: .main) {
+                self.sortViewModels()
                 self.collectionView?.reloadData()
             }
         }
+    }
+    
+    private func sortViewModels() {
+        self.viewModels = self.viewModels.sorted(by: { first, second in
+            var date1: Date?
+            var date2: Date?
+            first.forEach { type in
+                switch type {
+                case .timestamp(let vm):
+                    date1 = vm.date
+                default:
+                    break
+                }
+            }
+            second.forEach { type in
+                switch type {
+                case .timestamp(let vm):
+                    date2 = vm.date
+                default:
+                    break
+                }
+            }
+            
+            if let date1 = date1, let date2 = date2 {
+                return date1 > date2
+            }
+            
+            return false
+        })
     }
     
     private func createViewModel(
