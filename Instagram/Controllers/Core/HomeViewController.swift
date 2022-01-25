@@ -32,35 +32,62 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         guard let username = UserDefaults.standard.string(forKey: "username") else {
             return
         }
-        DatabaseManager.shared.posts(for: username) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let posts):
-
-                    let group = DispatchGroup()
-                    
-                    posts.forEach { model in
-                        group.enter()
-                        self?.createViewModel(
-                            model: model,
-                            username: username,
-                            completion: { success in
-                                defer {
-                                    group.leave()
-                                }
-                                if !success {
-                                    print("failed to create VM")
-                                }
-                        })
+        let userGroup = DispatchGroup()
+        userGroup.enter()
+        
+        var allPosts: [(post: Post, owner: String)] = []
+        
+        DatabaseManager.shared.following(for: username) { usernames in
+            defer {
+                userGroup.leave()
+            }
+            
+            let users = usernames + [username]
+            print("Users: \(users)")
+            
+            for current in users {
+                userGroup.enter()
+                DatabaseManager.shared.posts(for: current) { [weak self] result in
+                    DispatchQueue.main.async {
+                        defer {
+                            userGroup.leave()
+                        }
+                        switch result {
+                        case .success(let posts):
+                            allPosts.append(contentsOf: posts.compactMap({
+                                (post: $0, owner: current)
+                            }))
+                        case .failure:
+                            break
+                        }
                     }
-                    
-                    group.notify(queue: .main) {
-                        self?.collectionView?.reloadData()
-                    }
-
-                case .failure(let error):
-                    print(error)
                 }
+            }
+        }
+            
+        userGroup.notify(queue: .main) {
+            let sorted = allPosts.sorted(by: {
+                return $0.post.date > $1.post.date
+            })
+            let group = DispatchGroup()
+            sorted.forEach { model in
+                group.enter()
+                self.createViewModel(
+                    model: model.post,
+                    username: model.owner,
+                    completion: { success in
+                        defer {
+                            group.leave()
+                        }
+                        if !success {
+                            print("failed to create VM")
+                        }
+                    }
+                )
+            }
+            
+            group.notify(queue: .main) {
+                self.collectionView?.reloadData()
             }
         }
     }
@@ -71,10 +98,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         completion: @escaping (Bool) -> Void
     ) {
         StorageManager.shared.profilePictureURL(for: username) { [weak self] profilePictureURL in
-
             guard let postUrl = URL(string: model.postUrlString),
                   let profilePictureURL = profilePictureURL else {
-                print("failed to get urls")
                 return
             }
             
