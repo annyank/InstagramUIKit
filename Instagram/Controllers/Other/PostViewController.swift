@@ -125,6 +125,7 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
         username: String,
         completion: @escaping (Bool) -> Void
     ) {
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
         StorageManager.shared.profilePictureURL(for: username) { [weak self] profilePictureURL in
             guard let strongSelf = self,
                   let postUrl = URL(string: model.postUrlString),
@@ -132,6 +133,8 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 completion(false)
                 return
             }
+            
+            let isLiked = model.likers.contains(currentUsername)
             
             DatabaseManager.shared.getComments(
                 postID: strongSelf.post.id,
@@ -149,7 +152,7 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
                             postURL: postUrl
                         )
                     ),
-                    .actions(viewModel: PostActionsCollectionViewCellViewModel(isLiked: false)),
+                    .actions(viewModel: PostActionsCollectionViewCellViewModel(isLiked: isLiked)),
                     .likeCount(viewModel: PostLikesCollectionViewCellViewModel(likers: [])),
                     .caption(
                         viewModel: PostCaptionCollectionViewCellViewModel(
@@ -206,7 +209,7 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.delegate = self
-            cell.configure(with: viewModel)
+            cell.configure(with: viewModel, index: indexPath.section)
             return cell
         case .actions(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(
@@ -226,7 +229,7 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.delegate = self
-            cell.configure(with: viewModel)
+            cell.configure(with: viewModel, index: indexPath.section)
             return cell
         case .caption(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(
@@ -282,10 +285,8 @@ extension PostViewController: CommentBarViewDelegate {
 }
 
 extension PostViewController: PostLikesCollectionViewCellDelegate {
-    func postLikesCollectionViewCellDidTapLikeCount(_ cell: PostLikesCollectionViewCell) {
-        print("tapped on like count")
+    func postLikesCollectionViewCellDidTapLikeCount(_ cell: PostLikesCollectionViewCell, index: Int) {
         let vc = ListViewController(type: .likers(usernames: []))
-        vc.title = "Liked By"
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -316,13 +317,31 @@ extension PostViewController: PostActionsCollectionViewCellDelegate {
     }
     
     func postActionsCollectionViewCellDidTapLike(_ cell: PostActionsCollectionViewCell, isLiked: Bool, index: Int) {
-        // call DB to update like state
+        DatabaseManager.shared.updateLikeState(
+            state: isLiked ? .like : .unlike,
+            postID: post.id,
+            owner: owner
+        ) { success in
+            guard success else {
+                print("Failed to like")
+                return
+            }
+        }
     }
 }
 
 extension PostViewController: PostCollectionViewCellDelegate {
-    func postCollectionViewCellDidLike(_ cell: PostCollectionViewCell) {
-        print("did double tap like")
+    func postCollectionViewCellDidLike(_ cell: PostCollectionViewCell, index: Int) {
+        DatabaseManager.shared.updateLikeState(
+            state: .like,
+            postID: post.id,
+            owner: owner
+        ) { success in
+            guard success else {
+                print("Failed to like")
+                return
+            }
+        }
     }
 }
 

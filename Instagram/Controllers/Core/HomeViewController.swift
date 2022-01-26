@@ -145,11 +145,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         username: String,
         completion: @escaping (Bool) -> Void
     ) {
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
         StorageManager.shared.profilePictureURL(for: username) { [weak self] profilePictureURL in
             guard let postUrl = URL(string: model.postUrlString),
                   let profilePictureURL = profilePictureURL else {
                 return
             }
+            
+            let isLiked = model.likers.contains(currentUsername)
             
             let postData: [HomeFeedCellType] = [
                 .poster(
@@ -163,8 +166,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         postURL: postUrl
                     )
                 ),
-                .actions(viewModel: PostActionsCollectionViewCellViewModel(isLiked: false)),
-                .likeCount(viewModel: PostLikesCollectionViewCellViewModel(likers: [])),
+                .actions(viewModel: PostActionsCollectionViewCellViewModel(isLiked: isLiked)),
+                .likeCount(viewModel: PostLikesCollectionViewCellViewModel(likers: model.likers)),
                 .caption(
                     viewModel: PostCaptionCollectionViewCellViewModel(
                         username: username,
@@ -213,7 +216,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.delegate = self
-            cell.configure(with: viewModel)
+            cell.configure(with: viewModel, index: indexPath.section)
             return cell
         case .actions(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(
@@ -233,7 +236,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 fatalError()
             }
             cell.delegate = self
-            cell.configure(with: viewModel)
+            cell.configure(with: viewModel, index: indexPath.section)
             return cell
         case .caption(let viewModel):
             guard let cell = collectionView.dequeueReusableCell(
@@ -259,10 +262,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 }
 
 extension HomeViewController: PostLikesCollectionViewCellDelegate {
-    func postLikesCollectionViewCellDidTapLikeCount(_ cell: PostLikesCollectionViewCell) {
-        print("tapped on like count")
-        let vc = ListViewController(type: .likers(usernames: []))
-        vc.title = "Liked By"
+    func postLikesCollectionViewCellDidTapLikeCount(_ cell: PostLikesCollectionViewCell, index: Int) {
+        let vc = ListViewController(type: .likers(usernames: allPosts[index].post.likers))
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -298,13 +299,31 @@ extension HomeViewController: PostActionsCollectionViewCellDelegate {
     }
     
     func postActionsCollectionViewCellDidTapLike(_ cell: PostActionsCollectionViewCell, isLiked: Bool, index: Int) {
-        // call DB to update like state
+        let tuple = allPosts[index]
+        DatabaseManager.shared.updateLikeState(
+            state: isLiked ? .like : .unlike,
+            postID: tuple.post.id,
+            owner: tuple.owner
+        ) { success in
+            guard success else {
+                return
+            }
+        }
     }
 }
 
 extension HomeViewController: PostCollectionViewCellDelegate {
-    func postCollectionViewCellDidLike(_ cell: PostCollectionViewCell) {
-        print("did tap like")
+    func postCollectionViewCellDidLike(_ cell: PostCollectionViewCell, index: Int) {
+        let tuple = allPosts[index]
+        DatabaseManager.shared.updateLikeState(
+            state: .like,
+            postID: tuple.post.id,
+            owner: tuple.owner
+        ) { success in
+            guard success else {
+                return
+            }
+        }
     }
 }
 
