@@ -15,7 +15,7 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     private var collectionView: UICollectionView?
     
-    private var viewModels: [HomeFeedCellType] = []
+    private var viewModels: [SinglePostCellType] = []
     
     private let commentBarView = CommentBarView()
     
@@ -126,39 +126,56 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
         completion: @escaping (Bool) -> Void
     ) {
         StorageManager.shared.profilePictureURL(for: username) { [weak self] profilePictureURL in
-            guard let postUrl = URL(string: model.postUrlString),
+            guard let strongSelf = self,
+                  let postUrl = URL(string: model.postUrlString),
                   let profilePictureURL = profilePictureURL else {
+                completion(false)
                 return
             }
             
-            let postData: [HomeFeedCellType] = [
-                .poster(
-                    viewModel: PosterCollectionViewCellViewModel(
-                        username: username,
-                        profilePictureURL: profilePictureURL
+            DatabaseManager.shared.getComments(
+                postID: strongSelf.post.id,
+                owner: strongSelf.owner
+            ) { comments in
+                var postData: [SinglePostCellType] = [
+                    .poster(
+                        viewModel: PosterCollectionViewCellViewModel(
+                            username: username,
+                            profilePictureURL: profilePictureURL
+                        )
+                    ),
+                    .post(
+                        viewModel: PostCollectionViewCellViewModel(
+                            postURL: postUrl
+                        )
+                    ),
+                    .actions(viewModel: PostActionsCollectionViewCellViewModel(isLiked: false)),
+                    .likeCount(viewModel: PostLikesCollectionViewCellViewModel(likers: [])),
+                    .caption(
+                        viewModel: PostCaptionCollectionViewCellViewModel(
+                            username: username,
+                            caption: model.caption
+                        )
                     )
-                ),
-                .post(
-                    viewModel: PostCollectionViewCellViewModel(
-                        postURL: postUrl
+                ]
+                
+                if let comment = comments.first {
+                    postData.append(
+                        .comment(viewModel: comment)
                     )
-                ),
-                .actions(viewModel: PostActionsCollectionViewCellViewModel(isLiked: false)),
-                .likeCount(viewModel: PostLikesCollectionViewCellViewModel(likers: [])),
-                .caption(
-                    viewModel: PostCaptionCollectionViewCellViewModel(
-                        username: username,
-                        caption: model.caption
-                    )
-                ),
-                .timestamp(
-                    viewModel: PostDatetimeCollectionViewCellViewModel(
-                        date: DateFormatter.formatter.date(from: model.postedDate) ?? Date()
+                }
+                
+                postData.append(
+                    .timestamp(
+                        viewModel: PostDatetimeCollectionViewCellViewModel(
+                            date: DateFormatter.formatter.date(from: model.postedDate) ?? Date()
+                        )
                     )
                 )
-            ]
-            self?.viewModels = postData
-            completion(true)
+                
+                self?.viewModels = postData
+                completion(true)
+            }
         }
     }
 
@@ -230,6 +247,15 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             cell.configure(with: viewModel)
             return cell
+        case .comment(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CommentCollectionViewCell.identifier,
+                for: indexPath
+            ) as? CommentCollectionViewCell else {
+                fatalError()
+            }
+            cell.configure(with: viewModel)
+            return cell
         }
     }
 }
@@ -286,9 +312,7 @@ extension PostViewController: PostActionsCollectionViewCellDelegate {
     }
     
     func postActionsCollectionViewCellDidTapComment(_ cell: PostActionsCollectionViewCell, index: Int) {
-//        let vc = PostViewController()
-//        vc.title = "Post"
-//        navigationController?.pushViewController(vc, animated: true)
+        commentBarView.field.becomeFirstResponder()
     }
     
     func postActionsCollectionViewCellDidTapLike(_ cell: PostActionsCollectionViewCell, isLiked: Bool, index: Int) {
@@ -339,7 +363,7 @@ extension PostViewController: PosterCollectionViewCellDelegate {
 
 extension PostViewController {
     func configureCollectionView() {
-        let sectionHeight: CGFloat = 240 + view.width
+        let sectionHeight: CGFloat = 300 + view.width
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { index, _ in
@@ -380,6 +404,13 @@ extension PostViewController {
                     )
                 )
                 
+                let commentItem = NSCollectionLayoutItem(
+                    layoutSize: NSCollectionLayoutSize(
+                        widthDimension: .fractionalWidth(1),
+                        heightDimension: .absolute(60)
+                    )
+                )
+                
                 let timestampItem = NSCollectionLayoutItem(
                     layoutSize: NSCollectionLayoutSize(
                         widthDimension: .fractionalWidth(1),
@@ -399,6 +430,7 @@ extension PostViewController {
                         actionsItem,
                         likeCountItem,
                         captionItem,
+                        commentItem,
                         timestampItem
                     ]
                 )
@@ -441,6 +473,7 @@ extension PostViewController {
             CommentCollectionViewCell.self,
             forCellWithReuseIdentifier: CommentCollectionViewCell.identifier
         )
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         self.collectionView = collectionView
     }
 }

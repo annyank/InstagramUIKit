@@ -17,6 +17,7 @@
 		0132AB3827A03E04004D1D12 /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3727A03E04004D1D12 /* CommentCollectionViewCell.swift */; };
 		0132AB3A27A1368B004D1D12 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3927A1368B004D1D12 /* Comment.swift */; };
 		0132AB3C27A13CF7004D1D12 /* CommentBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3B27A13CF7004D1D12 /* CommentBarView.swift */; };
+		0132AB3E27A1690D004D1D12 /* SinglePostCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3D27A1690D004D1D12 /* SinglePostCellType.swift */; };
 		01622718278709C800A6C013 /* FollowNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01622717278709C800A6C013 /* FollowNotificationTableViewCell.swift */; };
 		0162271A278709FC00A6C013 /* LikeNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01622719278709FC00A6C013 /* LikeNotificationTableViewCell.swift */; };
 		0162271C27870A2E00A6C013 /* CommentNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0162271B27870A2E00A6C013 /* CommentNotificationTableViewCell.swift */; };
@@ -85,6 +86,7 @@
 		0132AB3727A03E04004D1D12 /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
 		0132AB3927A1368B004D1D12 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0132AB3B27A13CF7004D1D12 /* CommentBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBarView.swift; sourceTree = "<group>"; };
+		0132AB3D27A1690D004D1D12 /* SinglePostCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePostCellType.swift; sourceTree = "<group>"; };
 		01622717278709C800A6C013 /* FollowNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		01622719278709FC00A6C013 /* LikeNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		0162271B27870A2E00A6C013 /* CommentNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				01B1D5B6278DBC9A005A0304 /* UserInfo.swift */,
 				0132AB3527A02637004D1D12 /* SettingsModels.swift */,
 				0132AB3927A1368B004D1D12 /* Comment.swift */,
+				0132AB3D27A1690D004D1D12 /* SinglePostCellType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				01A64893276A453D00E99890 /* NotificationsViewController.swift in Sources */,
 				0164949F278079F400E18A57 /* PostDatetimeCollectionViewCellViewModel.swift in Sources */,
 				01A648BC276A754000E99890 /* SignInHeaderView.swift in Sources */,
+				0132AB3E27A1690D004D1D12 /* SinglePostCellType.swift in Sources */,
 				0132AB3C27A13CF7004D1D12 /* CommentBarView.swift in Sources */,
 				01B1D5B9278DC05D005A0304 /* EditProfileViewController.swift in Sources */,
 				01B1D5B5278D941E005A0304 /* ProfileHeaderCountViewViewModel.swift in Sources */,

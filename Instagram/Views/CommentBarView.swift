@@ -22,7 +22,7 @@ final class CommentBarView: UIView, UITextFieldDelegate {
         return button
     }()
     
-    private let field: IGTextField = {
+    let field: IGTextField = {
         let field = IGTextField()
         field.placeholder = "Comment"
         field.backgroundColor = .secondarySystemBackground
