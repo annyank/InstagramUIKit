@@ -391,4 +391,48 @@ final class DatabaseManager {
             completion(error == nil)
         }
     }
+    
+    // MARK: - Comment
+    
+    public func createComments(
+        comment: Comment,
+        postID: String,
+        owner: String,
+        completion: @escaping (Bool) -> Void
+    ) {
+        let newIdentifier = "\(postID)_\(comment.username)_\(Date().timeIntervalSince1970)_\(Int.random(in: 0...1000))"
+        let ref = database.collection("users")
+            .document(owner)
+            .collection("posts")
+            .document(postID)
+            .collection("comments")
+            .document(newIdentifier)
+        guard let data = comment.asDictionary() else { return }
+        ref.setData(data) { error in
+            completion(error == nil)
+        }
+    }
+    
+    public func getComments(
+        postID: String,
+        owner: String,
+        completion: @escaping ([Comment]) -> Void
+    ) {
+        let ref = database.collection("users")
+            .document(owner)
+            .collection("posts")
+            .document(postID)
+            .collection("comments")
+        ref.getDocuments { snapshot, error in
+            guard let comments = snapshot?.documents.compactMap({
+                Comment(with: $0.data())
+            }),
+            error == nil else {
+                completion([])
+                return
+            }
+            
+            completion(comments)
+        }
+    }
 }

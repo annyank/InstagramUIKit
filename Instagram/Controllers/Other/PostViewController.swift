@@ -17,6 +17,12 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     private var viewModels: [HomeFeedCellType] = []
     
+    private let commentBarView = CommentBarView()
+    
+    private var observer: NSObjectProtocol?
+    
+    private var hideObserver: NSObjectProtocol?
+    
     // MARK: - Init
     
     init(post: Post, owner: String) {
@@ -36,12 +42,57 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
         title = "Post"
         view.backgroundColor = .systemBackground
         configureCollectionView()
+        view.addSubview(commentBarView)
+        commentBarView.delegate = self
         fetchPost()
+        observeKeyboardChange()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView?.frame = view.bounds
+        commentBarView.frame = CGRect(
+            x: 0,
+            y: view.height-view.safeAreaInsets.bottom-70,
+            width: view.width,
+            height: 70
+        )
+    }
+    
+    private func observeKeyboardChange() {
+        observer = NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil,
+            queue: .main
+        ) { notification in
+            guard let userInfo = notification.userInfo,
+                  let height = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else {
+                return
+            }
+            UIView.animate(withDuration: 0.2) {
+                self.commentBarView.frame = CGRect(
+                    x: 0,
+                    y: self.view.height-60-height,
+                    width: self.view.width,
+                    height: 70
+                )
+            }
+        }
+        
+        hideObserver = NotificationCenter.default.addObserver(
+            forName: UIResponder.keyboardWillHideNotification,
+            object: nil,
+            queue: .main
+        ) { _ in
+            UIView.animate(withDuration: 0.2) {
+                self.commentBarView.frame = CGRect(
+                    x: 0,
+                    y: self.view.height-self.view.safeAreaInsets.bottom-70,
+                    width: self.view.width,
+                    height: 70
+                )
+            }
+        }
     }
     
     private func fetchPost() {
@@ -179,6 +230,27 @@ class PostViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             cell.configure(with: viewModel)
             return cell
+        }
+    }
+}
+
+extension PostViewController: CommentBarViewDelegate {
+    func commentBarViewDidTapDone(_ commentBarView: CommentBarView, withText text: String) {
+        guard let currentUsername = UserDefaults.standard.string(forKey: "username") else { return }
+        DatabaseManager.shared.createComments(
+            comment: Comment(
+                username: currentUsername,
+                comment: text,
+                dateString: String.date(from: Date()) ?? ""
+            ),
+            postID: post.id,
+            owner: owner
+        ) { success in
+            DispatchQueue.main.async {
+                guard success else {
+                    return
+                }
+            }
         }
     }
 }

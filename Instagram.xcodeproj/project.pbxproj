@@ -15,6 +15,8 @@
 		011D776527859EEE00BCDE74 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D776427859EEE00BCDE74 /* PhotoCollectionViewCell.swift */; };
 		0132AB3627A02637004D1D12 /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3527A02637004D1D12 /* SettingsModels.swift */; };
 		0132AB3827A03E04004D1D12 /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3727A03E04004D1D12 /* CommentCollectionViewCell.swift */; };
+		0132AB3A27A1368B004D1D12 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3927A1368B004D1D12 /* Comment.swift */; };
+		0132AB3C27A13CF7004D1D12 /* CommentBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0132AB3B27A13CF7004D1D12 /* CommentBarView.swift */; };
 		01622718278709C800A6C013 /* FollowNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01622717278709C800A6C013 /* FollowNotificationTableViewCell.swift */; };
 		0162271A278709FC00A6C013 /* LikeNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01622719278709FC00A6C013 /* LikeNotificationTableViewCell.swift */; };
 		0162271C27870A2E00A6C013 /* CommentNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0162271B27870A2E00A6C013 /* CommentNotificationTableViewCell.swift */; };
@@ -81,6 +83,8 @@
 		011D776427859EEE00BCDE74 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		0132AB3527A02637004D1D12 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		0132AB3727A03E04004D1D12 /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
+		0132AB3927A1368B004D1D12 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		0132AB3B27A13CF7004D1D12 /* CommentBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentBarView.swift; sourceTree = "<group>"; };
 		01622717278709C800A6C013 /* FollowNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		01622719278709FC00A6C013 /* LikeNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		0162271B27870A2E00A6C013 /* CommentNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				011C17952796B57700C8CE24 /* IGFollowButton.swift */,
 				011C179727970DA200C8CE24 /* ListUserTableViewCell.swift */,
 				0132AB3727A03E04004D1D12 /* CommentCollectionViewCell.swift */,
+				0132AB3B27A13CF7004D1D12 /* CommentBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				0162271F278716F900A6C013 /* NotificationCellType.swift */,
 				01B1D5B6278DBC9A005A0304 /* UserInfo.swift */,
 				0132AB3527A02637004D1D12 /* SettingsModels.swift */,
+				0132AB3927A1368B004D1D12 /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 				01A64893276A453D00E99890 /* NotificationsViewController.swift in Sources */,
 				0164949F278079F400E18A57 /* PostDatetimeCollectionViewCellViewModel.swift in Sources */,
 				01A648BC276A754000E99890 /* SignInHeaderView.swift in Sources */,
+				0132AB3C27A13CF7004D1D12 /* CommentBarView.swift in Sources */,
 				01B1D5B9278DC05D005A0304 /* EditProfileViewController.swift in Sources */,
 				01B1D5B5278D941E005A0304 /* ProfileHeaderCountViewViewModel.swift in Sources */,
 				01CBD9B52785E33F007D3618 /* SearchResultsViewController.swift in Sources */,
@@ -508,6 +515,7 @@
 				01A64895276A455D00E99890 /* ProfileViewController.swift in Sources */,
 				011D776527859EEE00BCDE74 /* PhotoCollectionViewCell.swift in Sources */,
 				01A648B6276A47DD00E99890 /* HapticsManager.swift in Sources */,
+				0132AB3A27A1368B004D1D12 /* Comment.swift in Sources */,
 				01F9045A27809BBC003E73A0 /* PosterCollectionViewCell.swift in Sources */,
 				01A64873276A289800E99890 /* AppDelegate.swift in Sources */,
 				01A64875276A289800E99890 /* SceneDelegate.swift in Sources */,
