@@ -68,7 +68,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         title = "Sign In"
         view.backgroundColor = .secondarySystemBackground
-        headerView.backgroundColor = .red
         addSubviews()
         
         emailField.delegate = self
