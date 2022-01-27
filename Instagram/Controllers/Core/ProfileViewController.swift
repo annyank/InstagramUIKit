@@ -288,8 +288,6 @@ extension ProfileViewController: ProfileHeaderCountViewDelegate {
         vc.completion = { [weak self] in
             self?.headerViewModel = nil
             self?.fetchProfileInfo()
-            // refresh header info
-//            self?.collectionView?.reloadData()
         }
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
@@ -332,7 +330,7 @@ extension ProfileViewController {
                     let group = NSCollectionLayoutGroup.horizontal(
                         layoutSize: NSCollectionLayoutSize(
                             widthDimension: .fractionalWidth(1),
-                            heightDimension: .fractionalHeight(1/3)
+                            heightDimension: .fractionalHeight(0.15)
                         ),
                         subitem: item,
                         count: 3

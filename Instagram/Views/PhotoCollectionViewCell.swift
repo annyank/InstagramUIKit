@@ -42,8 +42,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with url: URL?) {
-//        imageView.sd_setImage(with: url) { <#UIImage?#>, <#Error?#>, <#SDImageCacheType#>, <#URL?#> in
-//            <#code#>
-//        }
+        imageView.sd_setImage(with: url, completed: nil)
     }
 }
